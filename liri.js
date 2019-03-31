@@ -2,15 +2,15 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var spotify = new spotify(keys.spotify);
 var Spotify = require("node-spotify-api");
-var moment = require("moment"); //Both required to use moment for node
+var moment = require("moment");
 moment().format();
 
-var axios = require("axios"); //To get the information from the APIs for movie and concert-this
+var axios = require("axios");
 
-var fs = require("fs"); //To read the random.txt file for the do-what-it-says function
+var fs = require("fs");
 
-var command = process.argv[2]; //For the switch statement
-var value = process.argv[3]; //To send the song/movie/concert to their respective functions
+var command = process.argv[2];
+var value = process.argv[3];
 
 switch (command) {
   case "concert-this":
@@ -36,8 +36,8 @@ function concertThis(value) {
     )
     .then(function(response) {
       for (var i = 0; i < response.data.length; i++) {
-        var datetime = response.data[i].datetime; //Saves datetime response into a variable
-        var dateArr = datetime.split("T"); //Attempting to split the date and time in the response
+        var datetime = response.data[i].datetime;
+        var dateArr = datetime.split("T");
 
         var concertResults =
           "--------------------------------------------------------------------" +
@@ -46,7 +46,7 @@ function concertThis(value) {
           "\nVenue Location: " +
           response.data[i].venue.city +
           "\nDate of the Event: " +
-          moment(dateArr[0], "MM-DD-YYYY"); //dateArr[0] should be the date separated from the time
+          moment(dateArr[0], "MM-DD-YYYY");
         console.log(concertResults);
       }
     })
